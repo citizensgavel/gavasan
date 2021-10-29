@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Domain\$controllerPath\Service;
+
+use App\Domain\$controllerPath\Repository\$classRepository;
+use UnexpectedValueException;
+
+final class $classService {
+
+    private $repository;
+    
+    public function __construct($classRepository $repository){
+        $this->repository = $repository;
+    }
+
+
+    public function action($data){
+        return $this->repository->action($data);
+    }
+
+}

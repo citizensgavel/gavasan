@@ -1,0 +1,102 @@
+{
+    "name": "gavel/gavasan",
+    "type": "project",
+    "description": "Gavasan",
+    "license": "MIT",
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "akrabat/ip-address-middleware": "^1.0",
+        "cakephp/chronos": "^2",
+        "cakephp/database": "^4",
+        "cboden/ratchet": "^0.4.3",
+        "clue/block-react": "1.4",
+        "clue/buzz-react": "^2.9",
+        "delight-im/file-upload": "^1.2",
+        "evenement/evenement": "^3.0",
+        "fig/http-message-util": "^1.1",
+        "fullpipe/twig-webpack-extension": "^3.0",
+        "gargron/fileupload": "^1.5",
+        "gumlet/php-image-resize": "^2.0",
+        "havenshen/slim-cors": "^1.0",
+        "monolog/monolog": "^2",
+        "odan/phinx-migrations-generator": "^5.1",
+        "php-di/php-di": "^6.2",
+        "phpmailer/phpmailer": "^6.5",
+        "ratchet/rfc6455": "^0.3.0",
+        "react/http": "1.0.0",
+        "react/promise": "^2.8",
+        "react/promise-stream": "^1.2",
+        "react/socket": "1.5",
+        "selective/array-reader": "^1",
+        "selective/basepath": "^1",
+        "selective/validation": "^0.11",
+        "slim/psr7": "^1.4",
+        "slim/slim": "^4.8",
+        "slim/twig-view": "^3",
+        "symfony/console": "^5.0",
+        "symfony/css-selector": "^5.1",
+        "symfony/dom-crawler": "^5.1",
+        "symfony/http-foundation": "^5.0",
+        "symfony/serializer": "^5.0",
+        "symfony/translation": "^5.0",
+        "symfony/twig-bridge": "^5.0",
+        "tuupola/cors-middleware": "^1.2",
+        "twilio/sdk": "^6.10"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "overtrue/phplint": "^1.1",
+        "phpstan/phpstan": "0.*",
+        "phpunit/phpunit": "^7 || ^8",
+        "squizlabs/php_codesniffer": "^3.4",
+        "symfony/filesystem": "^5.0",
+        "symfony/finder": "^5.0"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/Utility/translate.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "npm install",
+            "npm run build"
+        ],
+        "build": "ant build",
+        "build:cc": "ant cc",
+        "check": [
+            "@lint",
+            "@cs:check",
+            "@sniffer:check",
+            "@phpstan",
+            "@test:coverage"
+        ],
+        "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --diff-format=udiff --config=.cs.php",
+        "cs:fix": "php-cs-fixer fix --config=.cs.php",
+        "lint": "phplint ./ --exclude=vendor --no-interaction --no-cache",
+        "phinx:create": "phinx create -c config/phinx.php --ansi",
+        "phinx:generate": "phinx-migrations generate --overwrite -c config/phinx.php --ansi",
+        "phinx:migrate": "phinx migrate -c config/phinx.php --ansi -vvv",
+        "phpstan": "phpstan analyse src tests config --level=max -c phpstan.neon --no-progress --ansi",
+        "schema:dump": "php bin/console.php schema-dump",
+        "sniffer:check": "phpcs --standard=phpcs.xml",
+        "sniffer:fix": "phpcbf --standard=phpcs.xml",
+        "test": "phpunit --configuration phpunit.xml",
+        "test:coverage": "phpunit --configuration phpunit.xml --coverage-clover build/logs/clover.xml --coverage-html build/coverage",
+        "twig:compile": "php bin/console.php compile-twig --ansi"
+    }
+}

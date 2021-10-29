@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Action\$controllerPath;
+
+use App\Domain\$controllerPath\Service\$classService;
+use App\Responder\Responder;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Fig\Http\Message\StatusCodeInterface;
+
+/**
+ * Action.
+ */
+final class $class{
+
+    private $responder;
+    private $service;
+
+    public function __construct(Responder $responder,$classService $service){
+        $this->responder = $responder;
+        $this->service = $service;
+    }
+
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface{
+        $data = (array) $request->getParsedBody();
+
+        $$class = $this->service->action($data);
+
+        if($$class){
+            return $this->responder
+            ->json($response, ['$class' => $$class, 'RequestStates' => 'success'])
+            ->withStatus(StatusCodeInterface::STATUS_OK);
+        }else {
+             return $this->responder
+            ->json($response, ['$class' => [], 'RequestStates' => 'forbidden', 'reason' => 'Unauthorized token passed'])
+            ->withStatus(StatusCodeInterface::STATUS_FORBIDDEN);
+        }
+    }
+}
