@@ -24,15 +24,15 @@ final class $class{
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface{
         $data = (array) $request->getParsedBody();
 
-        $$class = $this->service->action($data);
+        $passer = $this->service->action($data);
 
-        if($$class){
+        if($passer){
             return $this->responder
-            ->json($response, ['$class' => $$class, 'RequestStates' => 'success'])
+            ->json($response, ['data' => $passer, 'RequestStates' => 'success'])
             ->withStatus(StatusCodeInterface::STATUS_OK);
         }else {
              return $this->responder
-            ->json($response, ['$class' => [], 'RequestStates' => 'success'])
+            ->json($response, ['data' => [], 'RequestStates' => 'success'])
             ->withStatus(StatusCodeInterface::STATUS_OK);
         }
     }
