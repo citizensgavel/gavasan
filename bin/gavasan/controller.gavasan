@@ -32,8 +32,8 @@ final class $class{
             ->withStatus(StatusCodeInterface::STATUS_OK);
         }else {
              return $this->responder
-            ->json($response, ['$class' => [], 'RequestStates' => 'forbidden', 'reason' => 'Unauthorized token passed'])
-            ->withStatus(StatusCodeInterface::STATUS_FORBIDDEN);
+            ->json($response, ['$class' => [], 'RequestStates' => 'success'])
+            ->withStatus(StatusCodeInterface::STATUS_OK);
         }
     }
 }
