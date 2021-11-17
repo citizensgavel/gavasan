@@ -7,6 +7,6 @@ return function (App $app) {
     $app->get('/', \App\Action\Home\Home::class)->setName('root');
 
     $app->group('/v1/authe', function (RouteCollectorProxy $group) {
-        $group->post('/login', \App\Action\Authetication\Login::class);
+        $group->post('/login', \App\Action\Authe\Login::class);
     }); 
 };

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Action\$controllerPath;
+namespace App\Action\Authe;
 
-use App\Domain\$controllerPath\Service\$classService;
+use App\Domain\Authe\Service\LoginService;
 use App\Responder\Responder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,12 +13,12 @@ use App\CoreFunctions\InternalCoreFunction;
 /**
  * Action.
  */
-final class $class{
+final class Login{
 
     private $responder;
     private $service;
 
-    public function __construct(Responder $responder,$classService $service, InternalCoreFunction $internalCoreFunction){
+    public function __construct(Responder $responder,LoginService $service, InternalCoreFunction $internalCoreFunction){
         $this->responder = $responder;
         $this->service = $service;
         $this->internalCoreFunction = $internalCoreFunction;
@@ -29,6 +29,11 @@ final class $class{
         $firewall = [];
 
         //Checking Firewall and make decisions...
+        if($data['email'] === ""){
+            $firewall['data'] = [];
+            $firewall['message'] = 'Email is empty';
+            $firewall['status'] = StatusCodeInterface::STATUS_EARLY_HINTS;
+        }
         //if(decisions is not statisfiable):
             //$firewall['data'] = [];
             //$firewall['message'] = 'Send the Message to user'

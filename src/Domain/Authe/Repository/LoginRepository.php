@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\$controllerPath\Repository;
+namespace App\Domain\Authe\Repository;
 
 use DomainException;
 use PDO;
@@ -9,7 +9,7 @@ use App\CoreFunctions\InternalCoreFunction;
 use Fig\Http\Message\StatusCodeInterface;
 
 
-final class $classRepository {
+final class LoginRepository {
 
     private $connection;
     private $queryFactory;
